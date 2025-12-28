@@ -22,7 +22,7 @@ def gen(
 
     device = get_device()
 
-    voice = PiperVoice.load("../models/cy_GB-bu_tts-medium.onnx", use_cuda=(device == "cuda"))
+    voice = PiperVoice.load("models/cy_GB-bu_tts-medium.onnx", use_cuda=(device == "cuda"))
 
     df = pd.read_csv(data_path)
 
@@ -62,12 +62,11 @@ def gen(
 def main() -> None:
     arguments = args()
 
-    print("Arguments: ", arguments)
-    print(f"CALL: [{arguments['name']}]")
+    print(f"CALL: [{arguments.name}]")
     gen(
-        data_path=arguments["input"],
-        save_dir=arguments["output"],
-        limit=arguments["limit"],
+        data_path=arguments.input,
+        save_dir=arguments.output,
+        limit=int(arguments.limit),
     )
 
 

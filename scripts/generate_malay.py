@@ -58,12 +58,11 @@ def gen(
 def main() -> None:
     arguments = args()
 
-    print("Arguments: ", arguments)
-    print(f"CALL: [{arguments['name']}]")
+    print(f"CALL: [{arguments.name}]")
     gen(
-        data_path=arguments["input"],
-        save_dir=arguments["output"],
-        limit=arguments["limit"],
+        data_path=arguments.input,
+        save_dir=arguments.output,
+        limit=int(arguments.limit),
     )
 
 

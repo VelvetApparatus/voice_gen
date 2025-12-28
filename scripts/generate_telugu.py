@@ -9,6 +9,8 @@ import soundfile as sf
 
 from pkg.args import args
 from pkg.device import get_device
+from huggingface_hub import login
+
 
 
 
@@ -17,6 +19,7 @@ def gen(
         save_dir: str,
         limit: int,
 ):
+    login(token="xxx")
     device = get_device()
     model = ParlerTTSForConditionalGeneration.from_pretrained("ai4bharat/indic-parler-tts-pretrained").to(device)
     tokenizer = AutoTokenizer.from_pretrained("ai4bharat/indic-parler-tts-pretrained")
@@ -68,12 +71,11 @@ def gen(
 def main() -> None:
     arguments = args()
 
-    print("Arguments: ", arguments)
-    print(f"CALL: [{arguments['name']}]")
+    print(f"CALL: [{arguments.name}]")
     gen(
-        data_path=arguments["input"],
-        save_dir=arguments["output"],
-        limit=arguments["limit"],
+        data_path=arguments.input,
+        save_dir=arguments.output,
+        limit=int(arguments.limit),
     )
 
 

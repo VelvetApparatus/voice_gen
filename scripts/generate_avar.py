@@ -8,6 +8,7 @@ from tqdm import tqdm
 from pkg.device import get_device
 import torch
 import soundfile as sf
+from pkg.args import args
 
 
 def gen(
@@ -50,12 +51,12 @@ def gen(
         path_name = os.path.join(wav_dir, f"{idx}.wav")
         audio = model.apply_tts(
             text=text,
-            sample_rate=16000,
+            sample_rate=24000,
             put_accent=True,
             put_yo=True,
         )
 
-        sf.write(path_name, audio, 16000)
+        sf.write(path_name, audio, 24000)
 
 
         marking_list[idx] = {
@@ -74,12 +75,11 @@ def gen(
 def main() -> None:
     arguments = args()
 
-    print("Arguments: ", arguments)
-    print(f"CALL: [{arguments['name']}]")
+    print(f"CALL: [{arguments.name}]")
     gen(
-        data_path=arguments["input"],
-        save_dir=arguments["output"],
-        limit=arguments["limit"],
+        data_path=arguments.input,
+        save_dir=arguments.output,
+        limit=int(arguments.limit),
     )
 
 
