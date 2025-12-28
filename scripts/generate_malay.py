@@ -58,11 +58,14 @@ def gen(
 def main() -> None:
     arguments = args()
 
+    if arguments.limit is not None:
+        arguments.limit = int(arguments.limit)
+
     print(f"CALL: [{arguments.name}]")
     gen(
         data_path=arguments.input,
         save_dir=arguments.output,
-        limit=int(arguments.limit),
+        limit=arguments.limit,
     )
 
 
