@@ -1,0 +1,11 @@
+numpy
+pandas
+tqdm
+soundfile
+requests
+torch
+torchaudio
+kokoro>=0.9.4
+chatterbox-tts
+piper-tts
+silero-tts
