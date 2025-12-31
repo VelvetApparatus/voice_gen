@@ -49,12 +49,13 @@ def gen(
         wav_dir = os.path.join(save_dir, "avar_silero")
         os.makedirs(wav_dir, exist_ok=True)
         path_name = os.path.join(wav_dir, f"{idx}.wav")
-        audio = model.apply_tts(
-            text=text,
-            sample_rate=24000,
-            put_accent=True,
-            put_yo=True,
-        )
+        with torch.no_grad():
+            audio = model.apply_tts(
+                text=text,
+                sample_rate=24000,
+                put_accent=False,
+                put_yo=False,
+            )
 
         sf.write(path_name, audio, 24000)
 
